@@ -49,7 +49,7 @@ public class TurntableSubsystem extends SubsystemBase {
 	}
 
 	//set power here
-	private void setPower(double tt_power) {
+	public void setPower(double tt_power) {
         tt_motor.set(tt_power);
     }
 	//get encoder here

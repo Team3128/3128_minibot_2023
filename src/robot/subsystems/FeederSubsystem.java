@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import robotCore.Device;
 
 //import encoder, encoder type, and motor (PWMMotor)
-import robotCore.encoder;
+import robotCore.Encoder;
 import robotCore.PWMMotor;
 import robotCore.Encoder.EncoderType;
 
@@ -34,16 +34,17 @@ public class FeederSubsystem extends SubsystemBase {
 	private static FeederSubsystem instance;
 	public static synchronized FeederSubsystem getInstance(){
 		if (instance == null) {
-			instance = new FeederSubsystem
+			instance = new FeederSubsystem();
 		}
+		return instance;
 	}
-}
+
 
 	//create motor object
-	private final PWMMotor f_motor = new PWMMotor(PWMPin, DirPin);
+	private PWMMotor f_motor = new PWMMotor(k_PWMPin, k_DirPin);
 
 	//create encoder object
-	private final Encoder f_encoder = new Encoder(EncoderType.Quadrature);
+	public final Encoder f_encoder = new Encoder(EncoderType.Quadrature);
 
 	
 
@@ -53,7 +54,7 @@ public class FeederSubsystem extends SubsystemBase {
 
 
 	//set your motor power here
-	private void f_powerSet(double f_power) {
+	public void setPower(double f_power) {
 		f_motor.set(f_power);
 	}
 
@@ -69,3 +70,4 @@ public class FeederSubsystem extends SubsystemBase {
 		// This method will be called once per scheduler run
 	}
 
+}

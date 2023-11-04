@@ -20,14 +20,23 @@
 package robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.team3128.common.hardware.input.NAR_Joystick;
+import robotCore.GenericHID;
 //also be sure to import joystick
 import robotCore.Joystick;
 //import literally everything (all subsystems and commands)
 
 
-import robot.subsystems.*;
-import robot.commands.*;
+import robot.commands.CmdArcadeDrive;
+import robot.commands.CmdFeedAndShoot;
+import robot.commands.CmdFeeder;
+import robot.commands.CmdShooter;
+import robot.commands.CmdTurntable;
 
+import robot.subsystems.DriveSubsystem;
+import robot.subsystems.FeederSubsystem;
+import robot.subsystems.ShooterSubsystem;
+import robot.subsystems.TurntableSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -38,10 +47,16 @@ import robot.commands.*;
  */
 public class RobotContainer {
   //you know the drill, define subsystems and joystick
-  nar_joystick
+  private final DriveSubsystem m_drive = new DriveSubsystem();
+  private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+  private final FeederSubsystem m_feeder = new FeederSubsystem();
+  private final TurntableSubsystem m_turntable = new TurntableSubsystem();
+  private final NAR_Joystick m_Nar_Joystick = new NAR_Joystick(0);
 
   public RobotContainer() {
     //everything you include here is stuff that you want the minibot to do
+    configureButtonBindings();
+    m_drive.setDefaultCommand(new CmdArcadeDrive(m_drive, m_Nar_Joystick));
     
   }
 
@@ -53,9 +68,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //configure your joystick buttons to each command here!
-      if button1 = true {
-        turnFeeder();
-      }
+    m_Nar_Joystick.getButton(1).whileTrue(new CmdShooter(m_shooter, 0.8));
+    m_Nar_Joystick.getButton(2).whileTrue(new CmdFeeder(m_feeder, 0.6));
+    m_Nar_Joystick.getButton(3).whileTrue(new CmdTurntable(m_turntable, 0.6));
+    m_Nar_Joystick.getButton(4).whileTrue(new CmdTurntable(m_turntable, -0.6));
+    m_Nar_Joystick.getButton(5).whileTrue(new CmdFeedAndShoot(m_feeder, m_shooter, 0.5, 0.8));
  
   }
 

@@ -20,15 +20,20 @@ package robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //import encoder 
+import robotCore.Encoder;
 //import Turntable subsystem
+import robot.subsystems.TurntableSubsystem;
 
 public class CmdTurntable extends CommandBase {
     //define stuff here, like power, subsystem, etc.
+    private final TurntableSubsystem m_Turntable;
+    private final double m_power;
     
-    public CmdTurntable() {
+    public CmdTurntable(TurntableSubsystem n_Turntable, double n_power) {
         //parameters include the subsystem and power
-
-        addRequirements();
+        this.m_Turntable = n_Turntable;
+        this.m_power = n_power;
+        addRequirements(m_Turntable);
     }
 
   
@@ -36,6 +41,7 @@ public class CmdTurntable extends CommandBase {
     public void initialize() {
 
     //set power here
+    m_Turntable.setPower(m_power);
 
     }
 
@@ -46,6 +52,9 @@ public class CmdTurntable extends CommandBase {
     }
 
     //put isFinished() here
+    public boolean isFinished(){
+		return false;
+	}
 
  
     @Override

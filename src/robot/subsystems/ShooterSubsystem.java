@@ -37,7 +37,7 @@ private static ShooterSubsystem instance;
     }
     return instance;
   }
-private final Encoder s_Encoder = new Encoder(EncoderType.Quadrature);
+public final Encoder s_Encoder = new Encoder(EncoderType.Quadrature);
 
     public ShooterSubsystem() {
 
@@ -49,9 +49,13 @@ private final Encoder s_Encoder = new Encoder(EncoderType.Quadrature);
     }
 
     //set power here 
-    private void setPower(double s_power) {
+    public void setPower(double s_power) {
         s_motor.set(s_power);
     }
+    public Encoder getEncoder() {
+
+      return (s_Encoder.clone());
+  }
 
 
 

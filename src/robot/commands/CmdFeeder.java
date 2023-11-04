@@ -25,22 +25,22 @@ import robot.subsystems.FeederSubsystem;
 
 public class CmdFeeder extends CommandBase {
 	//define stuff here, like subsystem, power, etc.
-	private final double power;
-	private final FeederSubsystem feeder;
+	private final double m_power;
+	private final FeederSubsystem m_feeder;
 
 	public CmdFeeder(FeederSubsystem f_feeder, double f_power) {
 		//parameters include the subsystem and the power 
 		
-		power = this.f_power;
-		feeder = this.f_feeder;
+		this.m_power = f_power;
+		this.m_feeder = f_feeder;
 
-		addRequirements(FeederSubsystem);
+		addRequirements(m_feeder);
 	}
 
 	@Override
 	public void initialize() {
 		//set power here
-		f_powerSet(power);
+		m_feeder.setPower(m_power);
 	}
 
 
@@ -56,6 +56,6 @@ public class CmdFeeder extends CommandBase {
 
 	@Override
 	public void end(boolean interrupted) {
-		f_motor.setPower(0,0) 
+		m_feeder.setPower(0); 
 	}
 }
