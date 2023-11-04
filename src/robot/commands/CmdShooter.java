@@ -27,8 +27,7 @@ public class CmdShooter extends CommandBase {
 
     public CmdShooter() {
         //parameters include the subsystem and power
-
-
+        //this is a demo
         addRequirements();
     }
 
